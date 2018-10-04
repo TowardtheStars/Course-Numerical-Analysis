@@ -24,8 +24,6 @@ public:
 
     void addPointList(const vector<tuple<double, double>>&);              //core
 
-    static double difference(vector<tuple<double, double>> pointList);
-
     void clear();
 };
 
