@@ -14,22 +14,19 @@ using namespace std;
 class NewtonianInterpolation{
 
 protected:
-    vector<tuple<double, double>> pList;
-    vector<double> diffChart;
+    vector<double> xList, yList, diffChart;
     void makeChart();
 public:
-    NewtonianInterpolation();
+    NewtonianInterpolation() = default;
     explicit NewtonianInterpolation(vector<tuple<double,double>>&);
 
-    double operator()(double);
+    double operator()(double) const;
 
-    void addPoint(tuple<double, double>);                           //converter
-    void addPoint(double, double);                                  //converter
-    void addPointList(vector<tuple<double, double>>&);              //core
-    void addPointList(initializer_list<initializer_list<double>>);  //converter
+    void addPointList(const vector<tuple<double, double>>&);              //core
 
     static double difference(vector<tuple<double, double>> pointList);
 
+    void clear();
 };
 
 

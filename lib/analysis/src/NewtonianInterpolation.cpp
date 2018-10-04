@@ -23,35 +23,37 @@ double NewtonianInterpolation::difference(vector<tuple<double, double>> pointLis
     }
 }
 
-NewtonianInterpolation::NewtonianInterpolation() {}
 
 NewtonianInterpolation::NewtonianInterpolation(vector<tuple<double, double>>& points)
 {
     addPointList(points);
 }
 
-double NewtonianInterpolation::operator()(double x)
+double NewtonianInterpolation::operator()(double x) const
 {
-    size_t size = pList.size();
-    double result = get<1>(pList[0]);
+    size_t size = xList.size();
+    double result;
     double temp = 1.0;
     if (size < 2)
         return 0;
-    for (int i = 0; i < size; ++i) {
-        temp *= x - get<0>(pList[i]);
-        result += diffChart[i] * temp;
+    result = yList[0];
+    for (int i = 0; i < size - 1; ++i) {
+        temp *= x - xList[i];
+        result += diffChart[i + 1] * temp;
     }
     return result;
 }
 
-void NewtonianInterpolation::addPointList(vector<tuple<double, double>> & points)
+void NewtonianInterpolation::addPointList(const vector<tuple<double, double>> & points)
 {
     size_t n = points.size();
-    size_t size = pList.size();
-    pList.resize(n + size);
+    size_t size = xList.size();
+    xList.resize(n + size);
+    yList.resize(n + size);
     /* make point list */
     for (int i = 0; i < n; ++i) {
-        pList[i + size] = points[i];
+        xList[i + size] = get<0>(points[i]);
+        yList[i + size] = get<1>(points[i]);
     }
     makeChart();
 
@@ -59,19 +61,27 @@ void NewtonianInterpolation::addPointList(vector<tuple<double, double>> & points
 
 void NewtonianInterpolation::makeChart()
 {
-    size_t n = pList.size();
-    size_t i = diffChart.size();
-    diffChart.resize(n, 0.0);
-    vector<tuple<double,double>> temp(i);
-    if(i!=0)
-        copy(&pList[0], &pList[i], temp.begin());
-    else {
-        temp.resize(1);
-        temp[0] = pList[0];
-        i = 1;
-    }
-    for (; i < n; ++i) {
-        temp.push_back(pList[i]);
-        diffChart[i - 1] = difference(temp);
+    diffChart = yList;
+    size_t n;
+    if (diffChart.empty())
+        return;
+    else
+        n = diffChart.size() - 1;
+    for (size_t i = 1; i <= n; ++i)
+    {
+        for (size_t j = n; j >= i; --j)
+        {
+            diffChart[j] = (diffChart[j] - diffChart[j - 1]) / (xList[j] - xList[j - i]);
+        }
     }
 }
+
+void NewtonianInterpolation::clear()
+{
+    xList.clear();
+    yList.clear();
+    diffChart.clear();
+}
+
+
+
