@@ -4,24 +4,6 @@
 
 #include "../NewtonianInterpolation.h"
 using namespace std;
-double NewtonianInterpolation::difference(vector<tuple<double, double>> pointList)
-{
-    size_t n = pointList.size();
-    if (n > 2)
-    {
-        vector<tuple<double, double>> listPre(n-1), listAft(n-1);
-        copy_n(&pointList[1], n-1, listAft.begin());
-        copy_n(&pointList[0], n-1, listPre.begin());
-        return (difference(listAft) - difference(listPre))/(get<0>(pointList[n-1]) - get<0>(pointList[0]));
-
-    }else if(n == 2)
-    {
-        return (get<1>(pointList[1]) - get<1>(pointList[0]))/(get<0>(pointList[1]) - get<0>(pointList[0]));
-    } else
-    {
-        throw out_of_range("too less points!");
-    }
-}
 
 
 NewtonianInterpolation::NewtonianInterpolation(vector<tuple<double, double>>& points)
