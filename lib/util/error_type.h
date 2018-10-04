@@ -1,0 +1,14 @@
+//
+// Created by TowardsTheStars on 2018/9/7.
+//
+
+#ifndef NUMERICALANALYSIS_ERROR_TYPE_H
+#define NUMERICALANALYSIS_ERROR_TYPE_H
+
+enum ErrorType
+{
+    ABSOLUTE,
+    FRACTIONAL,
+    EFFECTIVE_DIGITS
+};
+#endif //NUMERICALANALYSIS_ERROR_TYPE_H
