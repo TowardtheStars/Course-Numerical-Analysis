@@ -4,6 +4,6 @@ project(NumericalAnalysis)
 set(CMAKE_CXX_STANDARD 11)
 
 add_subdirectory(analysis)
-#add_subdirectory(algebra)
+add_subdirectory(algebra)
 add_subdirectory(util)
 
