@@ -8,3 +8,6 @@ target_link_libraries(Homework01 libanalysis)
 
 add_executable(Homework02 homework_02.cpp)
 target_link_libraries(Homework02 libanalysis)
+
+add_executable(Homework03 homework_03.cpp)
+target_link_libraries(Homework03 libanalysis libalgebra)
