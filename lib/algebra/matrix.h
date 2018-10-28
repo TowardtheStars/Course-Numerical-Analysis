@@ -7,6 +7,7 @@
 
 #include <vector>
 #include <exception>
+#include <iostream>
 
 using namespace std;
 class Mat
@@ -35,5 +36,5 @@ public:
 };
 
 Mat solveLinear(const Mat& coeff, const Mat& y);
-
+ostream& operator << (ostream&, Mat&);
 #endif //NUMERICALANALYSIS_MATRIX_H

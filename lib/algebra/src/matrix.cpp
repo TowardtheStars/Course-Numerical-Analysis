@@ -163,3 +163,23 @@ Mat solveLinear(const Mat & coeff, const Mat &y)
         throw out_of_range("unable to solve that kind of equations yet >_<");
     }
 }
+
+ostream& operator<<(ostream& out, Mat& result)
+{
+
+    out << '{';
+    for (int i = 0; i < result.getRow(); ++i)
+    {
+        out << '{';
+        for (int j = 0; j < result.getCol(); ++j)
+        {
+            out << result[i][j];
+            if (j != result.getCol() - 1)
+                out << ", ";
+        }
+        out << "}";
+        if (i != result.getRow() - 1)
+            out << ',';
+    }
+    out << '}' << endl;
+}
