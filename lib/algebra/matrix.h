@@ -11,7 +11,7 @@
 using namespace std;
 class Mat
 {
-    size_t row, col;
+    size_t row=0, col=0;
 public:
     size_t getRow() const;
 
@@ -33,5 +33,7 @@ public:
 
     Mat&operator=(const Mat &);
 };
+
+Mat solveLinear(const Mat& coeff, const Mat& y);
 
 #endif //NUMERICALANALYSIS_MATRIX_H
