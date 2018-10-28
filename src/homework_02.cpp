@@ -3,6 +3,7 @@
 //
 
 #include <iostream>
+#include <iomanip>
 #include <functional>
 #include <cmath>
 #include <fstream>
@@ -65,7 +66,7 @@ int main()
     {
         re1.addPointList(genSamp(f, sampX1, n[i]));
         re2.addPointList(genSamp(f, sampX2, n[i]));
-        cout << n[i] << '\t' << getMaxNormError(f, re1, sampX1, 500) <<
+        cout << n[i] << '\t' << setiosflags(ios::scientific) << getMaxNormError(f, re1, sampX1, 500) <<
         '\t' << getMaxNormError(f, re2, sampX1, 500) << endl;
         re1.clear();
         re2.clear();
